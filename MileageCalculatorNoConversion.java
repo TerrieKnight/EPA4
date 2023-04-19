@@ -93,8 +93,9 @@ public class MileageCalculatorNoConversion extends Application {
         tfDistance.setOnAction(e -> calcMileage());
         tfCapacity.setOnAction(e -> calcMileage());
         tfResult.setOnAction(e -> calcMileage());
-        rbKPL.setOnAction(e -> changeLabels());
-        rbMPG.setOnAction(e -> changeLabels());     
+//edit        rbKPL.setOnAction(e -> changeLabels());
+//edit        rbMPG.setOnAction(e -> changeLabels());    
+        cbo.setOnAction(e -> changeLabels());
         btnReset.setOnAction(e -> resetForm());
         
         // create a scene and place it in the stage
@@ -116,7 +117,7 @@ public class MileageCalculatorNoConversion extends Application {
      */
     private void changeLabels() {
     	// distinguish between L/100KM and MPG
-    	if (rbKPL.isSelected() && lblCapacity.getText().equals(defaultCapacity)) {
+    	if (cbo.getValue() == altResult && lblCapacity.getText().equals(defaultCapacity)) {
         	// update labels
         	lblCapacity.setText(altCapacity);
         	lblDistance.setText(altMileage);
@@ -145,7 +146,7 @@ public class MileageCalculatorNoConversion extends Application {
 
         // check for type of calculation
         double result = 0.0;
-        if (rbKPL.isSelected()) {
+        if (cbo.getValue() == altResult) {
         	// liters / 100KM
         	result = (distance != 0) ? capacity/(distance/100.0) : 0;
         } else {
@@ -162,7 +163,7 @@ public class MileageCalculatorNoConversion extends Application {
      */
     private void resetForm() {
         // reset all form fields
-    	rbMPG.setSelected(true);
+    	cbo.setValue(defaultResult);
         tfDistance.setText(defaultEntry);
         tfCapacity.setText(defaultEntry);
         tfResult.setText(defaultCalc);
@@ -177,5 +178,3 @@ public class MileageCalculatorNoConversion extends Application {
 	}
 
 }
-
-
